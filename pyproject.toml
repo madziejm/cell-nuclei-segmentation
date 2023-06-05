@@ -8,6 +8,10 @@ packages = [{include = "cell_nuclei_segmentation"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+segmentation-models-pytorch = "^0.3.3"
+torch = "^2.0.1"
+numpy = "^1.24.3"
+pytorch-lightning = "^2.0.2"
 
 
 [build-system]
