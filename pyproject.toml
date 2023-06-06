@@ -12,6 +12,7 @@ segmentation-models-pytorch = "^0.3.3"
 torch = "^2.0.1"
 numpy = "^1.24.3"
 pytorch-lightning = "^2.0.2"
+torchvision = "^0.15.2"
 
 
 [tool.poetry.group.dev.dependencies]
