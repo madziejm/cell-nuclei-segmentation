@@ -4,7 +4,7 @@ import torch
 from PIL import Image
 from torchvision.transforms import ToTensor
 from torch.utils.data import Dataset, DataLoader
-from cell_nuclei_segmentation.dataloader import CellNucleiDataset
+from dataloader import CellNucleiDataset
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -85,6 +85,7 @@ class CellNucleiDataset(Dataset):
         x = resize_transform(x)
         y = resize_transform(y)
 
+        # TODO: y contains ints from 0 to 300, we probably want binary tensors instead of floats with values between 0 and 1
         if self._transform is not None:
             x = self._transform(x)
             y = self._transform(y)

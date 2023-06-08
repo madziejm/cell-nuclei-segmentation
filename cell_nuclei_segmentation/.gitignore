@@ -1,0 +1,35 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Virtual Environment
+venv/
+env/
+*.env
+
+# IDE/Editor
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+
+# Compiled Files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Temporary Files
+*.bak
+*.tmp
+*.log
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+*.egg-info
