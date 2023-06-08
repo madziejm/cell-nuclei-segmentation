@@ -1,0 +1,80 @@
+Image_Name;Diagnosis;Preparation;Train-/Testset split;Testset class;Magnification;Modality;Device;Software;Mean BG signal;Mean FG signal;Signal/Noise;S/N Class
+Ganglioneuroblastoma_0;Ganglioneuroblastoma;tissue section;train;-;20x;FM;Zeiss Axioplan II;Metafer;2,5;83,6;34,1;>=4,<40
+Ganglioneuroblastoma_1;Ganglioneuroblastoma;tissue section;train;-;20x;FM;Zeiss Axioplan II;Metafer;2;88;44,2;>=40
+Ganglioneuroblastoma_10;Ganglioneuroblastoma;tissue section;test;GNB-II;63x;FM;Zeiss Axioplan II;Metafer;27;97,1;3,6;<4
+Ganglioneuroblastoma_2;Ganglioneuroblastoma;tissue section;train;-;20x;FM;Zeiss Axioplan II;Metafer;7,1;83,7;11,8;>=4,<40
+Ganglioneuroblastoma_3;Ganglioneuroblastoma;tissue section;train;-;20x;FM;Zeiss Axioplan II;Metafer;5,7;81,7;14,4;>=4,<40
+Ganglioneuroblastoma_4;Ganglioneuroblastoma;tissue section;test;GNB-I;20x;FM;Zeiss Axioplan II;Metafer;2,5;81,8;32,3;>=4,<40
+Ganglioneuroblastoma_6;Ganglioneuroblastoma;tissue section;test;GNB-II;40x;FM;Zeiss Axioplan II;Metafer;26,1;88,7;3,4;<4
+Ganglioneuroblastoma_7;Ganglioneuroblastoma;tissue section;test;GNB-I;20x;FM;Zeiss Axioplan II;Metafer;7,6;65,7;8,7;>=4,<40
+Ganglioneuroblastoma_8;Ganglioneuroblastoma;tissue section;test;GNB-I;20x;FM;Zeiss Axioplan II;Metafer;1,9;66;34,5;>=4,<40
+Ganglioneuroblastoma_9;Ganglioneuroblastoma;tissue section;test;GNB-II;63x;FM;Zeiss Axioplan II;Isis;2,6;62,4;24,4;>=4,<40
+Neuroblastoma_0;Neuroblastoma;Tumor touch imprint;train;-;63x;FM;Zeiss Axioplan II;Metafer;9,1;85,1;9,4;>=4,<40
+Neuroblastoma_1;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;13,1;99,4;7,6;>=4,<40
+Neuroblastoma_10;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;14;95,9;6,9;>=4,<40
+Neuroblastoma_11;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;41,8;106,5;2,5;<4
+Neuroblastoma_12;Neuroblastoma;Tumor touch imprint;test;NB-IV;63x;FM;Zeiss Axioplan II;Metafer;9,1;98,8;10,8;>=4,<40
+Neuroblastoma_13;Neuroblastoma;Tumor touch imprint;test;NB-IV;63x;FM;Zeiss Axioplan II;Metafer;15,1;59,1;3,9;<4
+Neuroblastoma_14;Neuroblastoma;Tumor touch imprint;test;NB-IV;63x;FM;Zeiss Axioplan II;Metafer;10,8;83,3;7,7;>=4,<40
+Neuroblastoma_15;Neuroblastoma;BM cytospin;test;NB-I;63x;FM;Zeiss Axioplan II;Metafer;20,5;92,5;4,5;>=4,<40
+Neuroblastoma_16;Neuroblastoma;BM cytospin;test;NB-I;63x;FM;Zeiss Axioplan II;Metafer;5;105,9;21;>=4,<40
+Neuroblastoma_17;Neuroblastoma;BM cytospin;test;NB-I;63x;FM;Zeiss Axioplan II;Metafer;4,9;96,5;19,8;>=4,<40
+Neuroblastoma_2;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;33,9;97,3;2,9;<4
+Neuroblastoma_3;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;17,6;52,7;3;<4
+Neuroblastoma_4;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;40,7;104,1;2,6;<4
+Neuroblastoma_5;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;14,3;112,2;7,9;>=4,<40
+Neuroblastoma_6;Neuroblastoma;Tumor touch imprint;train;-;63x;FM;Zeiss Axioplan II;Metafer;23,5;98,6;4,2;>=4,<40
+Neuroblastoma_7;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;35,3;108,9;3,1;<4
+Neuroblastoma_8;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;33,2;99,9;3;<4
+Neuroblastoma_9;Neuroblastoma;BM cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;21,3;62,1;2,9;<4
+normal_0;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;27;113,8;4,2;>=4,<40
+normal_1;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;25,6;103,9;4,1;>=4,<40
+normal_10;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;38,3;139,1;3,6;<4
+normal_11;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;23,4;112,6;4,8;>=4,<40
+normal_12;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;22,4;102,9;4,6;>=4,<40
+normal_13;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;19,4;130,4;6,7;>=4,<40
+normal_14;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;12,9;67,2;5,2;>=4,<40
+normal_15;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;16,9;123,7;7,3;>=4,<40
+normal_16;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;26,5;113,8;4,3;>=4,<40
+normal_17;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;19,9;119,4;6;>=4,<40
+normal_18;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;19,4;91,1;4,7;>=4,<40
+normal_19;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;20,2;94,3;4,7;>=4,<40
+normal_2;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;21,7;129,6;6;>=4,<40
+normal_20;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;39,9;119;3;<4
+normal_21;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;46,1;142,1;3,1;<4
+normal_22;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;47,1;141,5;3;<4
+normal_23;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;39,6;121;3,1;<4
+normal_24;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;22,5;99,7;4,4;>=4,<40
+normal_25;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;29,1;101;3,5;<4
+normal_26;normal (HaCaT);cellline cytospin;test;NC-I;63x;FM;Zeiss Axioplan II;Metafer;37,5;141;3,8;<4
+normal_27;normal (HaCaT);cellline cytospin;test;NC-I;63x;FM;Zeiss Axioplan II;Metafer;37,2;123,3;3,3;<4
+normal_28;normal (HaCaT);cellline grown;test;NC-III;63x;FM;Zeiss Axioplan II;Metafer;23,3;104,1;4,5;>=4,<40
+normal_29;normal (HaCaT);cellline cytospin;test;NC-I;63x;FM;Zeiss Axioplan II;Metafer;15;121,2;8,1;>=4,<40
+normal_3;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;41,2;130;3,2;<4
+normal_30;normal (HaCaT);cellline cytospin;test;NC-I;63x;FM;Zeiss Axioplan II;Metafer;54;147,5;2,7;<4
+normal_31;normal (HaCaT);cellline cytospin;test;NC-I;63x;FM;Zeiss Axioplan II;Metafer;19,5;120,2;6,2;>=4,<40
+normal_32;normal (HaCaT);cellline grown;test;NC-III;63x;FM;Zeiss Axioplan II;Metafer;34,2;118,6;3,5;<4
+normal_33;normal (HaCaT);cellline grown;test;NC-III;63x;FM;Zeiss Axioplan II;Metafer;35,9;113,2;3,2;<4
+normal_34;normal (HaCaT);cellline cytospin;test;NC-II;10x;FM;Zeiss Axioplan II;Metafer;31,8;116,8;3,7;<4
+normal_35;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;38,7;132;3,4;<4
+normal_36;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;30,4;127,6;4,2;>=4,<40
+normal_37;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;29,4;114;3,9;<4
+normal_38;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;20,7;70,3;3,4;<4
+normal_39;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;19,7;75;3,8;<4
+normal_4;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;14,6;129,7;8,9;>=4,<40
+normal_40;normal (HaCaT);cellline cytospin;test;NC-II;40x;FM;Zeiss Axioplan II;Metafer;19,4;68,7;3,5;<4
+normal_5;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;13,7;81,4;6;>=4,<40
+normal_6;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;33,5;129;3,8;<4
+normal_7;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;37,2;102,4;2,8;<4
+normal_8;normal (HaCaT);cellline cytospin;train;-;63x;FM;Zeiss Axioplan II;Metafer;21,9;99,8;4,6;>=4,<40
+normal_9;normal (HaCaT);cellline grown;train;-;63x;FM;Zeiss Axioplan II;Metafer;30,9;95,4;3,1;<4
+otherspecimen_0;Neuroblastoma;cellline cytospin;test;NB-II;63x;FM;Zeiss Axioplan II;Metafer;5;63,7;12,7;>=4,<40
+otherspecimen_1;Neuroblastoma;cellline cytospin;test;NB-II;63x;FM;Zeiss Axioplan II;Metafer;8,6;81,2;9,4;>=4,<40
+otherspecimen_2;Neuroblastoma;tissue section;test;TS;63x;FM;Zeiss Axioplan II;Isis;9,5;87,8;9,3;>=4,<40
+otherspecimen_3;Wilms;tissue section;test;TS;63x;FM;Zeiss Axioplan II;Isis;15,9;45,2;2,8;<4
+otherspecimen_4;Neuroblastoma;cellline cytospin;test;NB-III;20x;LSM;Zeiss LSM 780;Zeiss;3;74,9;25,4;>=4,<40
+otherspecimen_5;Neuroblastoma;cellline cytospin;test;NB-III;63x;LSM;Zeiss LSM 780;Zeiss;0,1;60,4;640,8;>=40
+otherspecimen_6;Neuroblastoma;cellline cytospin;test;NB-III;20x;LSM;Leica SP8X;Leica;0,3;88,9;260,4;>=40
+otherspecimen_7;Neuroblastoma;cellline cytospin;test;NB-III;63x;LSM;Leica SP8X;Leica;1,1;92,7;84;>=40
+otherspecimen_8;Neuroblastoma;cellline cytospin;test;NB-III;63x;LSM;Leica SP8X;Leica;0;92,9;2277,6;>=40
+otherspecimen_9;Neuroblastoma;cellline cytospin;test;NB-III;63x;LSM;Leica SP8X;Leica;0;100,9;6797,3;>=40
