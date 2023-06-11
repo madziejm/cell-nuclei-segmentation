@@ -1,4 +1,5 @@
 from comet_ml import Experiment
+import os
 import torch
 import numpy as np
 from models.maskrcnn import MaskRCNN
@@ -40,6 +41,9 @@ def convert_masks(mask):
     return binary_masks_tensor
 
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 class Trainer:
 
     def __init__(
@@ -64,6 +68,7 @@ class Trainer:
         total_steps: int = 0
         with self._experiment.train():
             for epoch in range(num_epochs):
+                self._model.save(path=os.path.join(CURRENT_DIR, "..", "saved_models", f"maskrcnn_epoch_{epoch}"))
                 self._experiment.log_current_epoch(epoch)
                 for i, (images, targets) in enumerate(self._dataloader):
                     total_steps += 1
@@ -79,9 +84,7 @@ class Trainer:
 
                     # Forward pass
                     loss_dict = self._model(images, targets)
-                    print("loss_dict", loss_dict)
                     losses = sum(loss for loss in loss_dict.values())
-                    print("losses", losses)
 
                     # Backward pass and optimization
                     self._optimizer.zero_grad()
@@ -93,7 +96,7 @@ class Trainer:
                         value=losses.item(), 
                         step=total_steps
                     )
-                    if i % 10 == 0 or True:
+                    if i % 10 == 0:
                         print(f"Epoch: {epoch}, Iteration: {i}, Total steps: {total_steps}, Loss: {losses.item()}")
 
-                self._model.save(name=f"maskrcnn_epoch_{epoch}")
+                self._model.save(path=os.path.join(CURRENT_DIR, "..", "saved_models", f"maskrcnn_epoch_{epoch}"))

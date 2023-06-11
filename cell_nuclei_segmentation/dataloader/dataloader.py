@@ -3,7 +3,6 @@ import os
 import sys
 import inspect
 import torch
-import cv2
 from typing import Union, List, Tuple, Callable, Optional, Any
 from torchvision import transforms, utils
 import torchvision.transforms.functional as TF
