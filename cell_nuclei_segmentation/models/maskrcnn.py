@@ -34,8 +34,8 @@ class MaskRCNN:
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.model(x)
     
-    def save(self, name: str) -> None:
-        torch.save(self._model.state_dict(), os.path.join(CURRENT_DIR, '..', 'saved_models', f'{name}.pth'))
+    def save(self, path: str) -> None:
+        torch.save(self._model.state_dict(), path)
 
     
 
