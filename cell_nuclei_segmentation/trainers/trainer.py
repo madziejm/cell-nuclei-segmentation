@@ -99,4 +99,4 @@ class Trainer:
                     if i % 10 == 0:
                         print(f"Epoch: {epoch}, Iteration: {i}, Total steps: {total_steps}, Loss: {losses.item()}")
 
-                self._model.save(path=os.path.join(CURRENT_DIR, "..", "saved_models", f"maskrcnn_epoch_{epoch}"))
+                self._model.save(path=os.path.join(CURRENT_DIR, "..", "saved_models", f"maskrcnn_epoch_{epoch}.pth"))
