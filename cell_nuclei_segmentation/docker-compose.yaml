@@ -6,3 +6,5 @@ services:
     build: .
     volumes:
       - .:/app
+    environment:
+      - COMETML_API_KEY=${COMETML_API_KEY}
