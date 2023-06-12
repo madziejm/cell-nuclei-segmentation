@@ -22,7 +22,7 @@ def main() -> None:
     print("Using device:", device)
 
     experiment = Experiment(
-        api_key = "FN4Av6jEhDTqxcLYbHwkGMJeO",
+        api_key = os.environ["COMETML_API_KEY"],
         project_name = "cell-nuclei-segmentation",
         workspace="thefebrin"
     )
@@ -31,18 +31,30 @@ def main() -> None:
     experiment.add_tag(config["cometml_name"])
     experiment.log_parameters(config)
 
-    dataset = CellNucleiDataset.create(
-        images_path=os.path.join('dataset', 'rawimages'),
-        groundtruth_path=os.path.join('dataset', 'groundtruth'),
+    train_dataset = CellNucleiDataset.create(
         target_size=(
             config["target_size_x"], config["target_size_y"]
         ),  # biggest image in the dataset
         transform=ToTensor(),
+        train=True,
     )
-    dataloader = DataLoader(
-        dataset=dataset,
+    test_dataset = CellNucleiDataset.create(
+        target_size=(
+            config["target_size_x"], config["target_size_y"]
+        ),  # biggest image in the dataset
+        transform=ToTensor(),
+        train=False,
+    )
+    train_dataloader = DataLoader(
+        dataset=train_dataset,
         batch_size=config["batch_size"],
         shuffle=True,
+        num_workers=config["num_workers"],
+    )
+    test_dataloader = DataLoader(
+        dataset=train_dataset,
+        batch_size=config["batch_size"],
+        shuffle=False,
         num_workers=config["num_workers"],
     )
     
@@ -64,7 +76,8 @@ def main() -> None:
         model=model,
         device=device,
         optimizer=optimizer,
-        dataloader=dataloader,
+        train_dataloader=train_dataloader,
+        test_dataloader=test_dataloader,
         experiment=experiment,
     )
 

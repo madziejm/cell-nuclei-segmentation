@@ -10,12 +10,28 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class MaskRCNN:
-    def __init__(self) -> None:
-        self._model = maskrcnn_resnet50_fpn(pretrained=False)
+    def __init__(self, model=None) -> None:
+        if model is None:
+            self._model = maskrcnn_resnet50_fpn(pretrained=False)
+        else:
+            self._model = model
 
     def __call__(self, *args, **kwargs) -> torch.Tensor:
         return self._model(*args, **kwargs)
     
+    @staticmethod
+    def from_pretrained(path: str, gpu: bool = True) -> MaskRCNN:
+        model = maskrcnn_resnet50_fpn(pretrained=False)
+        if gpu:
+            saved_state = torch.load(path)
+        else:
+            saved_state = torch.load(path, map_location=torch.device('cpu'))
+        model.load_state_dict(saved_state)
+        return MaskRCNN(
+            model=model
+        )
+
+
     def eval(self) -> None:
         self._model.eval()
 

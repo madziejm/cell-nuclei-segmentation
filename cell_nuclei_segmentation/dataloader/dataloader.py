@@ -43,27 +43,31 @@ class CellNucleiDataset(Dataset):
 
     @staticmethod
     def create(
-        images_path: str, 
-        groundtruth_path: str, 
         target_size: Tuple[int, int],
         transform: Callable[[Any], Any],  # TODO: better type
+        train: bool,
     ) -> CellNucleiDataset:
         """
         Creates a dataset from the images in the data folder.
 
-        :param images_path: Path to the .tif rawimages folder.
-        """
-        images_filenames_list = os.listdir(images_path)
-        groundtruth_filenames_list = os.listdir(groundtruth_path)
-
+        :param train: use training dataset if True, else use test dataset
+        """       
+        image_description = pd.read_csv(os.path.join(CURRENT_DIR, "..", "dataset", "image_description.csv"), sep=";")
+        if train:
+            image_description = image_description[image_description["Train-/Testset split"] == "train"]
+            print(f"Loading {len(image_description)} training images")
+        else:
+            image_description = image_description[image_description["Train-/Testset split"] == "test"]
+            print(f"Loading {len(image_description)} testing images")
+        
         X = []
         y = []
-        for image_filename in images_filenames_list:
-            with Image.open(os.path.join(images_path, image_filename)) as img:
+        for image_name in image_description["Image_Name"]:
+            with Image.open(os.path.join(CURRENT_DIR, "..", "dataset", "rawimages", f"{image_name}.tif")) as img:
                 X.append(img.convert(mode="L"))
 
-        for groundtruth_filename in groundtruth_filenames_list:
-            with Image.open(os.path.join(groundtruth_path, groundtruth_filename)) as img:
+        for image_name in image_description["Image_Name"]:
+            with Image.open(os.path.join(CURRENT_DIR, "..", "dataset", "groundtruth", f"{image_name}.tif")) as img:
                 y.append(img.convert(mode="L"))
 
         return CellNucleiDataset(
@@ -94,10 +98,9 @@ class CellNucleiDataset(Dataset):
 if __name__ == "__main__":
     # Create the dataset.
     dataset = CellNucleiDataset.create(
-        images_path=os.path.join(CURRENT_DIR, '..', 'dataset', 'rawimages'),
-        groundtruth_path=os.path.join(CURRENT_DIR, '..', 'dataset', 'groundtruth'),
         target_size=(1024, 1360),  # biggest image in the dataset
         transform=ToTensor(),
+        train=True,
     )
 
     # Create the dataloader.
@@ -112,4 +115,8 @@ if __name__ == "__main__":
     for X, y in dataloader:
         print(X.shape)
         print(y.shape)
+        fig, ax = plt.subplots(1, 2)
+        ax[0].imshow(X[0][0].numpy())
+        ax[1].imshow(y[0].numpy())
+        plt.show()
         break

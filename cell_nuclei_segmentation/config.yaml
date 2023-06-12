@@ -7,12 +7,12 @@ num_workers: 4
 
 learning_rate: 0.0001
 
-num_epochs: 100
+num_epochs: 1000
 
 cometml_tag: cell_nuclei_segmentation
 
 device: cuda:5
 
-cometml_name: first_run_gpu
+cometml_name: run_gpu_1
 
 
