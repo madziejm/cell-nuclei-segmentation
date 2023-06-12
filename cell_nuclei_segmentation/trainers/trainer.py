@@ -35,10 +35,53 @@ class Trainer:
         self._validation_image_sent = False
 
     
+    def _log_file_to_cometml(self, images, epoch) -> None:
+        if not self._validation_image_sent:
+            self._experiment.log_image(
+                images[0][0].detach().cpu(),
+                name=f'validation_image_{epoch}'
+            )
+            self._validation_image_sent = True
+        
+        image = images[0][0].detach().cpu()
+        self._model.eval()
+        prediction = self._model(images)
+        self._model.train()
+        pred = prediction[0]
+        masks = pred['masks'].cpu().detach().numpy()
+        boxes = pred['boxes'].cpu().detach().numpy()
+
+        for threshold in (0.1, 0.5, 0.9):
+            fig, ax = plt.subplots(1, figsize=(15, 15))
+            ax.imshow(image)
+            
+            for i in range(masks.shape[0]):
+                mask = masks[i][0]
+                ax.imshow(mask > threshold, alpha=0.3)
+                box = boxes[i]
+                rect = patches.Rectangle((box[0], box[1]), box[2]-box[0], box[3]-box[1], linewidth=1, edgecolor='r', facecolor='none')
+                ax.add_patch(rect)
+
+            filename = f"validation_pred_epoch_{epoch}_threshold_{threshold}.png"
+            plt.savefig(filename)
+            self._experiment.log_image(
+                image_data=filename,
+                name=filename
+            )
+                        
     def _evaluate_model(self, epoch: int) -> None:
         # TODO: model should be put to .eval() to disable batchnorm and dropout
         #   but then loss_dict is not avaiable anymore
         #   see: https://discuss.pytorch.org/t/how-to-calculate-validation-loss-for-faster-rcnn/96307/13
+        
+        avg_losses = {
+            "loss_classifier": [],
+            "loss_box_reg": [],
+            "loss_mask": [],
+            "loss_objectness": [],
+            "loss_rpn_box_reg": [],
+        }
+        avg_loss_sum = []
         for i, (images, targets) in enumerate(self._test_dataloader):
             with torch.no_grad():
                 model_targets = self._create_model_targets(targets=targets)
@@ -51,52 +94,27 @@ class Trainer:
                 'loss_rpn_box_reg': tensor(0.6993)}
                 """
                 losses = sum(loss for loss in loss_dict.values())
-                print(f"Eval epoch: {epoch}, loss: {losses.item()}, loss_dict: {loss_dict}")
-                self._experiment.log_metric(
-                    name="validation_loss", 
-                    value=losses.item(), 
-                    step=epoch
-                )
-                losses_names = ["loss_classifier", "loss_box_reg", "loss_mask", "loss_objectness", "loss_rpn_box_reg"]
-                for loss_name in losses_names:
-                    self._experiment.log_metric(
-                        name=f"validation_{loss_name}", 
-                        value=loss_dict[loss_name].item(), 
-                        step=epoch
-                    )
+                avg_loss_sum.append(losses.item())
+                for loss_name in avg_losses.keys():
+                    avg_losses[loss_name].append(loss_dict[loss_name].item())
                     
                 if i == 0:
-                    if not self._validation_image_sent:
-                        self._experiment.log_image(
-                            images[0][0].detach().cpu(),
-                            name=f'validation_image_{epoch}'
-                        )
-                        self._validation_image_sent = True
-                    
-                    image = images[0][0].detach().cpu()
-                    prediction = self._model(images)
-                    pred = prediction[0]
-                    masks = pred['masks'].cpu().detach().numpy()
-                    boxes = pred['boxes'].cpu().detach().numpy()
-
-                    for threshold in (0.1, 0.5, 0.9):
-                        fig, ax = plt.subplots(1, figsize=(15, 15))
-                        ax.imshow(image)
-                        
-                        for i in range(masks.shape[0]):
-                            mask = masks[i][0]
-                            ax.imshow(mask > threshold, alpha=0.3)
-                            box = boxes[i]
-                            rect = patches.Rectangle((box[0], box[1]), box[2]-box[0], box[3]-box[1], linewidth=1, edgecolor='r', facecolor='none')
-                            ax.add_patch(rect)
-
-                        filename = "f'validation_pred_epoch_{epoch}_threshold_{threshold}"
-                        plt.imsave(filename)
-                        self._experiment.log_image(
-                            images=filename,
-                            name=filename
-                        )
+                    self._log_file_to_cometml(images=images, epoch=epoch)
                 
+        print(f"Eval epoch: {epoch}, avg loss: {np.mean(avg_loss_sum)}")
+        self._experiment.log_metric(
+            name=f"validation_loss_sum", 
+            value=np.mean(avg_loss_sum), 
+            step=epoch
+        )
+        for loss_name in avg_losses.keys():
+            self._experiment.log_metric(
+                name=f"validation_{loss_name}", 
+                value=np.mean(avg_losses[loss_name]), 
+                step=epoch
+            )
+            print(f"Eval epoch: {epoch}, avg {loss_name}: {np.mean(avg_losses[loss_name])}")
+                    
         
     def _create_model_targets(self, targets) -> List[dict]:
         model_targets = []
@@ -117,9 +135,8 @@ class Trainer:
 
         total_steps: int = 0
         with self._experiment.train():
-            print("Test eval model")  # TODO delete
-            self._evaluate_model(epoch=1)
-            for epoch in range(num_epochs):
+            self._evaluate_model(epoch=0)
+            for epoch in range(1, num_epochs + 1):
                 self._model.save(path=os.path.join(CURRENT_DIR, "..", "saved_models", f"maskrcnn_epoch_{epoch}"))
                 self._experiment.log_current_epoch(epoch)
                 for i, (images, targets) in enumerate(self._train_dataloader):

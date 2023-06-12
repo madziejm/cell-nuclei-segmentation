@@ -13,7 +13,21 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
-# import albumentations as A
+from albumentations import (
+    Compose, HorizontalFlip, VerticalFlip, Rotate, RandomBrightnessContrast, 
+    RandomGamma, ElasticTransform, GridDistortion, OpticalDistortion, ShiftScaleRotate, 
+    HueSaturationValue, GaussNoise, GaussianBlur, CLAHE
+)
+
+def get_augmentations():
+    return Compose([
+        HorizontalFlip(p=0.5),
+        VerticalFlip(p=0.5),
+        Rotate(limit=45, p=0.3),
+        ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.1, rotate_limit=45, p=0.3),
+        ElasticTransform(p=0.3),
+        GaussianBlur(sigma_limit=(1, 3), blur_limit=(1, 3), p=0.2),
+    ])
 
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -88,10 +102,17 @@ class CellNucleiDataset(Dataset):
         x = resize_transform(x)
         y = resize_transform(y)
 
-        # TODO: y contains ints from 0 to 300, we probably want binary tensors instead of floats with values between 0 and 1
+        # Note: y contains ints from 0 to 300, we probably want binary tensors instead of floats with values between 0 and 1
         if self._transform is not None:
-            x = self._transform(x)
-            y = torch.from_numpy(np.array(y, dtype=np.int32))
+            augmented = self._transform(
+                image=np.array(x, dtype=np.uint8), 
+                mask=np.array(y, dtype=np.uint8)
+            )
+            x = ToTensor()(augmented["image"])
+            y = torch.from_numpy(augmented["mask"])
+        else:
+            x = ToTensor()(x)
+            y = torch.from_numpy(np.array(y, dtype=np.uint8))
         return x, y
     
 
@@ -99,7 +120,7 @@ if __name__ == "__main__":
     # Create the dataset.
     dataset = CellNucleiDataset.create(
         target_size=(1024, 1360),  # biggest image in the dataset
-        transform=ToTensor(),
+        transform=get_augmentations(),
         train=True,
     )
 
@@ -107,7 +128,7 @@ if __name__ == "__main__":
     dataloader = DataLoader(
         dataset=dataset,
         batch_size=4,
-        shuffle=True,
+        shuffle=False,
         num_workers=1,
     )
 
