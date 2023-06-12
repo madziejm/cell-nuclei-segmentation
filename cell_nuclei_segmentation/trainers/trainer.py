@@ -86,7 +86,7 @@ class Trainer:
             with torch.no_grad():
                 model_targets = self._create_model_targets(targets=targets)
                 images = list(image.to(self._device) for image in images)
-                loss_dict = self._model(images, model_targets.to(self._device))
+                loss_dict = self._model(images, model_targets)
                 """
                 {'loss_classifier': tensor(2.7450),
                 'loss_box_reg': tensor(0.5253),
